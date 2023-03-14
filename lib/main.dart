@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/features/bmi/screen/bmi_screen.dart';
+import 'package:flutter_practice/features/weather/utils/weather_location_screen.dart';
+import 'package:flutter_practice/features/weather/weather_loading_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: const Color(0xff0a0e21),
         ),
       ),
-      home: const BmiScreen(),
+      home: const WeatherLocationScreen(),
     );
   }
 }

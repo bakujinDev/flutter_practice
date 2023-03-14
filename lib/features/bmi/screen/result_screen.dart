@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/features/bmi/data/calculator_brain.dart';
-import 'package:flutter_practice/features/bmi/data/constants.dart';
+import 'package:flutter_practice/features/bmi/utils/constants.dart';
 import 'package:flutter_practice/features/bmi/widget/bottom_button.dart';
 import 'package:flutter_practice/features/bmi/widget/reuseable_card.dart';
 

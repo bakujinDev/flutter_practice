@@ -7,7 +7,7 @@ import 'package:flutter_practice/features/bmi/widget/icon_content.dart';
 import 'package:flutter_practice/features/bmi/widget/reuseable_card.dart';
 import 'package:flutter_practice/features/bmi/widget/round_icon_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../data/constants.dart';
+import '../utils/constants.dart';
 
 Bmi bmi = Bmi();
 
