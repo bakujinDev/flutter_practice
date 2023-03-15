@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/features/weather/utils/constants.dart';
 
-class CityScreen extends StatelessWidget {
+class CityScreen extends StatefulWidget {
   const CityScreen({super.key});
+
+  @override
+  State<CityScreen> createState() => _CityScreenState();
+}
+
+class _CityScreenState extends State<CityScreen> {
+  late String cityName;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +28,9 @@ class CityScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.topLeft,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
                   ),
@@ -33,10 +42,20 @@ class CityScreen extends StatelessWidget {
               ),
               Container(
                 padding: const EdgeInsets.all(20),
-                child: null,
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                  decoration: kTextFieldInputDecooration,
+                  onChanged: (value) {
+                    cityName = value;
+                  },
+                ),
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context, cityName);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
                 ),

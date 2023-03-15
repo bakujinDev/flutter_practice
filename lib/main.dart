@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/features/weather/utils/weather_location_screen.dart';
 import 'package:flutter_practice/features/weather/weather_loading_screen.dart';
 
 void main() {
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: const Color(0xff0a0e21),
         ),
       ),
-      home: const WeatherLocationScreen(),
+      home: const WeatherLoadingScreen(),
     );
   }
 }
