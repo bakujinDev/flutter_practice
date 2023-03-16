@@ -15,7 +15,7 @@ class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
   CoinData coinData = CoinData();
   List<Widget> priceList = [];
-  late int? rateInt;
+  late int? rateInt = 0;
 
   void getInitCoinData({
     required String token,
