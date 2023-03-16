@@ -36,6 +36,8 @@ class _ChatLoginScreenState extends State<ChatLoginScreen> {
                 height: 48,
               ),
               TextField(
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
                 onChanged: (value) {},
                 decoration: kInputDecoration.copyWith(
                   hintText: 'Enter your email',
@@ -45,6 +47,8 @@ class _ChatLoginScreenState extends State<ChatLoginScreen> {
                 height: 8,
               ),
               TextField(
+                obscureText: true,
+                textAlign: TextAlign.center,
                 onChanged: (value) {},
                 decoration: kInputDecoration.copyWith(
                   hintText: 'Enter your password',
