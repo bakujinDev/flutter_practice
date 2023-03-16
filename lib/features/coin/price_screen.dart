@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/features/coin/data/coin_data.dart';
+import 'package:flutter_practice/features/coin/widget/price_card.dart';
 
 class PriceScreen extends StatefulWidget {
   const PriceScreen({super.key});
@@ -12,30 +13,30 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String selectedCurrency = 'USD';
   CoinData coinData = CoinData();
-  List<Widget> priceList = [];
-  late int? rateInt = 0;
 
-  void getInitCoinData({
-    required String token,
-    required String currency,
-  }) async {
-    double data = await coinData.getCoinData(token: token, currency: currency);
-    print(data.toInt());
+  String selectedCurrency = currenciesList[0];
+  Map<String, String> coinValues = {};
+  bool isWaiting = false;
 
-    rateInt = data.toInt();
+  void getData() async {
+    isWaiting = true;
 
-    setState(() {});
+    try {
+      coinValues = await coinData.getCoinData(currency: selectedCurrency);
+
+      isWaiting = false;
+
+      setState(() {});
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getInitCoinData(
-      token: 'BTC',
-      currency: 'USD',
-    );
+    getData();
   }
 
   DropdownButton<String> getAndroidPicker() {
@@ -61,6 +62,8 @@ class _PriceScreenState extends State<PriceScreen> {
       itemExtent: 32,
       onSelectedItemChanged: (selectedIndex) {
         print(currenciesList[selectedIndex]);
+        selectedCurrency = currenciesList[selectedIndex];
+        setState(() {});
       },
       children: [
         for (String currency in currenciesList) Text(currency),
@@ -78,26 +81,16 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Card(
-            color: Colors.lightBlueAccent,
-            elevation: 5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 15,
-                horizontal: 28,
-              ),
-              child: Text(
-                '1 BTC = ${rateInt ?? "?"} USD',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (String crypto in cryptoList)
+                PriceCard(
+                  crypto: crypto,
+                  rateInt: isWaiting ? '?' : coinValues[crypto] ?? '0',
+                  currency: selectedCurrency,
+                )
+            ],
           ),
           Container(
             height: 150,
