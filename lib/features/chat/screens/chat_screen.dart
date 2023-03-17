@@ -12,8 +12,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  // final _firestore = FirebaseDatabase.instance;
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
+  String messageText = '';
 
   void getCurrentUser() async {
     final user = _auth.currentUser;
@@ -21,7 +23,6 @@ class _ChatScreenState extends State<ChatScreen> {
     try {
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -42,7 +43,10 @@ class _ChatScreenState extends State<ChatScreen> {
         leading: null,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              _auth.signOut();
+              Navigator.pop(context);
+            },
             icon: const Icon(
               Icons.close,
             ),
@@ -51,6 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: const Text('⚡️Chat'),
         backgroundColor: Colors.lightBlueAccent,
       ),
+      backgroundColor: Colors.white,
       body: SafeArea(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -63,11 +68,13 @@ class _ChatScreenState extends State<ChatScreen> {
               children: [
                 Expanded(
                   child: TextField(
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      messageText = value;
+                    },
                     decoration: kMessageTextFieldDecoration,
                   ),
                 ),
-                ElevatedButton(
+                TextButton(
                   onPressed: () {},
                   child: const Text(
                     'Send',
