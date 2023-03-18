@@ -1,9 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/features/chat/screens/chat_screen.dart';
-import 'package:flutter_practice/features/chat/screens/login_screen.dart';
-import 'package:flutter_practice/features/chat/screens/registration_screen.dart';
-import 'package:flutter_practice/features/chat/screens/welcome_screen.dart';
+import 'package:flutter_practice/features/todoey/screens/task_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,36 +18,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData.dark().copyWith(
-        primaryColor: const Color(0xff0a0e21),
-        scaffoldBackgroundColor: const Color(0xff0a0e21),
-        appBarTheme: AppBarTheme.of(context).copyWith(
-          backgroundColor: const Color(0xff0a0e21),
-        ),
-        textTheme: const TextTheme(
-          titleMedium: TextStyle(
-            color: Colors.black,
-          ),
-          bodyLarge: TextStyle(
-            color: Colors.black,
-          ),
-          bodyMedium: TextStyle(
-            color: Colors.black,
-          ),
-          bodySmall: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
-      initialRoute: WelcomeScreen.id,
-      routes: {
-        WelcomeScreen.id: (context) => const WelcomeScreen(),
-        ChatLoginScreen.id: (context) => const ChatLoginScreen(),
-        RegistrationScreen.id: (context) => const RegistrationScreen(),
-        ChatScreen.id: (context) => const ChatScreen(),
-      },
+      // theme: ThemeData.dark().copyWith(
+      //   primaryColor: const Color(0xff0a0e21),
+      //   scaffoldBackgroundColor: const Color(0xff0a0e21),
+      //   appBarTheme: AppBarTheme.of(context).copyWith(
+      //     backgroundColor: const Color(0xff0a0e21),
+      //   ),
+      //   textTheme: const TextTheme(
+      //     titleMedium: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //     bodyLarge: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //     bodyMedium: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //     bodySmall: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      // ),
+      home: TaskScreen(),
     );
   }
 }
