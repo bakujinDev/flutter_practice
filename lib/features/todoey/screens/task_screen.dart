@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice/features/todoey/models/task.dart';
 import 'package:flutter_practice/features/todoey/screens/add_task_screen.dart';
 import 'package:flutter_practice/features/todoey/widgets/task_list.dart';
 
-class TaskScreen extends StatelessWidget {
+class TaskScreen extends StatefulWidget {
   const TaskScreen({super.key});
+
+  @override
+  State<TaskScreen> createState() => _TaskScreenState();
+}
+
+class _TaskScreenState extends State<TaskScreen> {
+  List<Task> tasks = [
+    Task(name: 'Buy milk'),
+    Task(name: 'Buy eggs'),
+    Task(name: 'Buy bread'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +32,13 @@ class TaskScreen extends StatelessWidget {
             ),
             isScrollControlled: true,
             context: context,
-            builder: (BuildContext context) => const AddTaskScreen(),
+            builder: (BuildContext context) => AddTaskScreen(
+              addTaskCallback: (String newText) {
+                tasks.add(Task(name: newText));
+                setState(() {});
+                Navigator.pop(context);
+              },
+            ),
           );
         },
         backgroundColor: Colors.lightBlueAccent,
@@ -83,7 +101,9 @@ class TaskScreen extends StatelessWidget {
                   topRight: Radius.circular(20),
                 ),
               ),
-              child: const TaskList(),
+              child: TaskList(
+                tasks: tasks,
+              ),
             ),
           ),
         ],

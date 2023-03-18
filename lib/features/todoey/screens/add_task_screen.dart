@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_practice/features/todoey/models/task.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  const AddTaskScreen({super.key});
+  const AddTaskScreen({
+    super.key,
+    required this.addTaskCallback,
+  });
+
+  final Function addTaskCallback;
 
   @override
   Widget build(BuildContext context) {
+    String newText = '';
+
     return Padding(
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
@@ -24,14 +30,20 @@ class AddTaskScreen extends StatelessWidget {
                 color: Colors.blueAccent,
               ),
             ),
-            const TextField(
+            TextField(
               autofocus: true,
+              onChanged: (value) => newText = value,
             ),
             const SizedBox(
               height: 8,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                if (newText.isEmpty) return;
+
+                Task task = Task(name: newText);
+                addTaskCallback(newText);
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlueAccent,
                 minimumSize: const Size(
